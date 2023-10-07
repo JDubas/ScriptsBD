@@ -1,37 +1,37 @@
-create sequence seq_cliente
-start with 1
-increment by 1
-maxvalue 1000
-minvalue 1
-nocache
-cycle;
+CREATE SEQUENCE seq_cliente
+START WITH 1
+INCREMENT BY 1
+MAXVALUE 1000
+MINVALUE 1
+NOCACHE
+CYCLE;
 
-drop sequence seq_cliente
+DROP SEQUENCE seq_cliente
 ----------------
-create table cliente (
-id number,
-nome varchar2(100),
-constraint pk_cliente primary key(id)
+CREATE TABLE cliente (
+id NUMBER,
+nome VARCHAR2(100),
+CONSTRAINT pk_cliente PRIMARY KEY(id)
 );
 
-create table cliente2 (
-id number generated always as identity,
-nome varchar2(100),
-constraint pk_cliente2 primary key(id)
+CREATE TABLE cliente2 (
+id NUMBER GENERATED ALWAYS AS IDENTITY,
+nome VARCHAR2(100),
+CONSTRAINT pk_cliente2 PRIMARY KEY(id)
 );
 
-drop table cliente
+DROP TABLE cliente
 
-CREATE or replace trigger trg_cliente
+CREATE OR REPLACE TRIGGER trg_cliente
 BEFORE INSERT ON cliente
 FOR EACH ROW
     BEGIN
-        :new.id := seq_cliente.nextval;
+        :NEW.id := seq_cliente.NEXTVAL;
     END;
     
-insert into cliente2 (nome) values ('Teste');
+INSERT INTO cliente2 (nome) VALUES ('Teste');
 
-select * from cliente2
+SELECT * FROM cliente2;
 
-delete from cliente
-delete from cliente2
+DELETE FROM cliente;
+DELETE FROM cliente2;
